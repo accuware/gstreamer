@@ -1,0 +1,27 @@
+{
+  "name": "gstreamer",
+  "version": "1.0.1",
+  "description": "GStreamer RTSP to WebBrowser",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ced-dev/gstreamer.git"
+  },
+  "keywords": [
+    "gstreamer",
+    "rtsp",
+    "websocket"
+  ],
+  "author": "ced-dev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ced-dev/gstreamer/issues"
+  },
+  "homepage": "https://github.com/ced-dev/gstreamer#readme",
+  "dependencies": {
+    "socket.io": "^1.4.5"
+  }
+}
