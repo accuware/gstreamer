@@ -1,0 +1,1 @@
+var gstreamer = require("../");
