@@ -1,27 +1,43 @@
 ### About
-GStreamer wrapper for very low latency streaming over websocket.
+GStreamer 1.0 wrapper for very low latency streaming over websocket in order to provide IP camera feeds to the Accuware Dragonfly Demonstrator.
 
-Perfect for IP Camera in a browser, webview etc.
-
-### Installation
+### Prerequesites Linux
 ```
 sudo apt-get install gstreamer-tools
 ```
-Then
+### Prerequisites macOS
+Install latest packages from here https://gstreamer.freedesktop.org/data/pkg/osx/1.14.2/
+
+### Clone this repo
 ```
-npm install gstreamer
+git clone https://github.com/accuware/gstreamer.git
+cd gstreamer
+```
+Then 
+```
+npm install
 ```
 
-### Usage
+### Edit `server.js` 
 ```javascript
-var gstreamer = require("../");
+var gstreamer = require(".");
 
 gstreamer.start({
-    url: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov",
-    //url: "rtsp://192.168.1.92:554//1",
-    port: 80,
+    url: "rtsp://<your-IP-camera-url>",
+    port: 8000,
     quiet: false
 });
 ```
 
-Run the example, and browse to your http://IP to see the result
+Run it 
+
+```
+node server.js
+```
+
+### Let Accuware Dragonfly Demonstrator know about the little helper
+Provide the configured port as URL query parameter while opening the Accuware Demonstrator in your browser
+
+```
+https://dragonflay-demo.accuware.com/?rtsp-helper-port=8000
+```
