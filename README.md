@@ -24,7 +24,7 @@ var gstreamer = require(".");
 
 gstreamer.start({
     url: "rtsp://<your-IP-camera-url>",
-    port: 8000,
+    port: 9000,
     quiet: false
 });
 ```
@@ -39,5 +39,5 @@ node server.js
 Provide the configured port as URL query parameter while opening the Accuware Demonstrator in your browser
 
 ```
-https://dragonflay-demo.accuware.com/?rtsp-helper-port=8000
+https://dragonflay-demo.accuware.com/?rtsp-helper-port=9000
 ```
