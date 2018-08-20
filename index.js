@@ -37,8 +37,9 @@ gstreamer.prototype.start = function (options) {
     
     this.server = this.http.createServer()
 
-    let io = self.sio.listen(self.server)
+    let io = self.sio.listen(self.server, {origins: '*:*'})
     let cam0 = io.of(self.suffix)
+   
 
     self.tcp = self.net.createServer((socket) => {
         socket.on("data", (data) => {
