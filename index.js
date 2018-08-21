@@ -14,6 +14,7 @@ gstreamer.prototype._args = function () {
         "latency=0",
         "is-live=true",         //probably outdated, but can't hurt
         "low-latency=true",     //probably outdated, but can't hurt
+        "buffer-mode=auto",
         "!", "decodebin",
         "!", "jpegenc", "quality=" + this.quality,
         "!", "tcpclientsink", "host=127.0.0.1", "port=" + this.tcpport

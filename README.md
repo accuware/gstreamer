@@ -3,7 +3,7 @@ GStreamer 1.0 wrapper for very low latency streaming over websocket in order to 
 
 ### Prerequesites Linux
 ```
-sudo apt-get install gstreamer-tools
+sudo apt-get install gstreamer1.0-tools
 ```
 ### Prerequisites macOS
 Install latest packages from here https://gstreamer.freedesktop.org/data/pkg/osx/1.14.2/
