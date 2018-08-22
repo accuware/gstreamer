@@ -39,7 +39,7 @@ node server.js
 ```
 
 ### Let Accuware Dragonfly Demonstrator know about the little helper
-Provide the configured port as URL query parameter while opening the Accuware Demonstrator in your browser
+Provide the configured helper endpoint as query parameter while opening the Accuware Demonstrator in your browser
 
 ```
 https://dragonfly-demo.accuware.com/?video-url=http://localhost:9000
