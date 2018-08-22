@@ -61,7 +61,7 @@ If you are unable to make this run, you can still let the Accuware Server obtain
 e.g.
 
 ```
-https://dragonfly-demo.accuware.com/?video-url=rtsp://feed.yourDomain.com
+https://dragonfly-demo.accuware.com/?video-url=rtsp://your_camera_feed.your_domain.com:554
 ```
 
 Please note: Your RTSP stream has to be publicly available on the Internet then. The latency will be a bit higher.
