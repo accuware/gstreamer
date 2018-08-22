@@ -45,7 +45,7 @@ Provide the configured helper endpoint as query parameter while opening the Accu
 https://dragonfly-demo.accuware.com/?video-url=http://localhost:9000
 ```
 
-> Note: Since this ends up in a mix of secure and insecure content, there is currently only `Chrome`, which supports this (for whatever reasons, since it is a tiny security hole). 
+> Note: Since this ends up in a mix of secure and insecure content, there is currently only `Chrome`, which supports this for whatever reasons, since it is a tiny security issue. 
 
 `Firefox` needs to be conviced via 
 ```
