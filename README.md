@@ -56,7 +56,7 @@ security.mixed_content.block_active_content = false
 `Edge` behaviour is unknown and I could not find any way to make `Safari` establishing a connection to `localhost` while being loaded from a secured server.
 
 
-If you are unable to make this run, you can still let the Accuware Server obtain the video directly. For this specify your public (!) RTSP stream address in the parameter line.
+If you are unable to make this run, you can still let the Accuware Server obtain the video directly. For this specify your **public** RTSP stream address in the parameter line.
 
 e.g.
 
