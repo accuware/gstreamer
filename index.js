@@ -16,7 +16,9 @@ gstreamer.prototype._args = function () {
         "is-live=true",         //probably outdated, but can't hurt
         "low-latency=true",     //probably outdated, but can't hurt
         "buffer-mode=auto",
-        "!", "decodebin",
+        "!", "rtph264depay",
+        "!", "avdec_h264",
+        "!", "videoconvert",
         "!", "jpegenc", "quality=" + this.quality,
         "!", "tcpclientsink", "host=127.0.0.1", "port=" + this.tcpport
     ];
@@ -31,13 +33,21 @@ gstreamer.prototype.start = function (options) {
     this.host = options.host || undefined
     this.port = options.port || 9000
     this.quality = options.quality || 85
-    this.tcpport = options.tcpport || options.port + 1         // internal socket for listening on incoming video frames   
-
+    this.tcpport = this.port + 1         // internal socket for listening on incoming video frames   
+    this.index = __dirname + "/index.html"
 
     let self = this
     let args = this._args()
 
-    this.server = this.http.createServer()
+    this.server = this.http.createServer(function (request, response) {
+        if (self.index && request.url === "/") {
+            self.fs.readFile(self.index, "utf-8", function (error, content) {
+                response.writeHead(200, {"Content-Type": "text/html"});
+                response.end(content);
+            });
+            console.log("Index loaded");
+        }
+    })
     let io = self.sio.listen(self.server, {origins: '*:*'})
 
     this.tcp = self.net.createServer((socket) => {

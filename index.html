@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>GStreamer RTSP to WebBrowser</title>
+        <style>
+            body {
+                background-color: #444444;
+                color: #ffffff;
+            }
+            #cam {
+                border: 1px solid #ffffff;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        </style>
+        <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+        <script>
+            var socket = null;
+            function start() {
+                var image = document.getElementById("cam");
+                if (socket) {
+                    socket.disconnect();
+                }
+                socket = io(location.origin).connect();
+                socket.on("data", function (data) {
+                    image.src = "data:image/jpeg;base64," + b64ab(new Uint8Array(data));
+                });
+            }
+            var b64e = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+            function b64ab(b) {
+                var c = "";
+                b = new Uint8Array(b);
+                for (var d = b.byteLength, f = d % 3, d = d - f, g, h, k, a, e = 0; e < d; e += 3)
+                    a = b[e] << 16 | b[e + 1] << 8 | b[e + 2], g = (a & 16515072) >> 18, h = (a & 258048) >> 12, k = (a & 4032) >> 6, a &= 63, c += b64e[g] + b64e[h] + b64e[k] + b64e[a];
+                1 === f ? (a = b[d], c += b64e[(a & 252) >> 2] + b64e[(a & 3) << 4] + "==") : 2 === f && (a = b[d] << 8 | b[d + 1], c += b64e[(a & 64512) >> 10] + b64e[(a & 1008) >> 4] + b64e[(a & 15) << 2] + "=");
+                return c;
+            }
+        </script>
+    </head>
+    <body onload="start()">
+        <img src="" id="cam" alt="" title="" />
+    </body>
+</html>
