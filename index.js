@@ -12,10 +12,10 @@ function gstreamer() {
 gstreamer.prototype._args = function () {
     return [
         "rtspsrc", "location=\"" + this.url + "\"",
-        "latency=0",
-        "is-live=true",         //probably outdated, but can't hurt
-        "low-latency=true",     //probably outdated, but can't hurt
-        "buffer-mode=auto",
+ //       "latency=0",
+ //       "is-live=true",         //probably outdated, but can't hurt
+ //       "low-latency=true",     //probably outdated, but can't hurt
+ //       "buffer-mode=auto",
         "!", "rtph264depay",
         "!", "avdec_h264",
         "!", "videoconvert",
