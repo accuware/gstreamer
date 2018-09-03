@@ -16,7 +16,7 @@ Install latest packages from here https://gstreamer.freedesktop.org/data/pkg/osx
 git clone https://github.com/accuware/gstreamer.git
 cd gstreamer
 ```
-Then 
+then 
 ```
 npm install
 ```
@@ -62,6 +62,37 @@ security.mixed_content.block_active_content = false
 
 `Edge` behaviour is unknown and I could not find any way to make `Safari` establishing a connection to `localhost` while being loaded from a secured server.
 
+By setting the options
+
+```
+    key: 'selfsign.key',
+    cert: 'selfsign.crt'
+```
+
+you enable the proxy to provide a "secured" channel by using a self signed certificate.
+
+> Note: You need to make your browser accept this self signed certificate by open `https://localhost:9000` in your browser and establish the browser specific exceptions, before you are able to pass this to the Dragonfly Demonstrator. By this you should see the video of the source in the browser window.
+
+```
+https://dragonfly-demo.accuware.com/?video-url=https://localhost:9000
+```
+
+
+You are free to use the provided certifcate but you can also roll your own or provide a real certificate.
+
+### Create self signed certifcate
+```
+openssl genrsa -out selfsign.key 2048 && openssl req -new -x509 -key selfsign.key -out selfsign.crt -sha256
+```
+
+will produce the two files `selfsign.key` and `selfsign.crt`, which you have to provide to the configuration.
+
+### Verfiy certifcate
+```
+openssl x509 -in selfsign.crt -text -noout
+openssl rsa -in selfsign.key -check
+````
+
 
 If you are unable to make this run, you can still let the Accuware Server obtain the video directly. For this specify your **public** RTSP stream address in the parameter line.
 
@@ -73,8 +104,8 @@ https://dragonfly-demo.accuware.com/?video-url=rtsp://<your-IP-camera-url>
 
 Please note: Your RTSP stream has to be publicly available on the Internet then. The latency will be a bit higher.
 
-### TODO
-- Secure to client
+### Todos
+
 - Harden against connectivity loss
 
 
