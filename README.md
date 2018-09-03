@@ -1,5 +1,5 @@
 ### About
-GStreamer 1.0 wrapper for very low latency streaming over websocket in order to provide IP camera feeds to the Accuware Dragonfly Demonstrator.
+GStreamer 1.0 proxy for very low latency streaming over websocket in order to provide IP camera feeds to the Accuware Dragonfly Demonstrator or a browser window.
 
 ### Prerequesites IP-Cam
 Obtain the RTSP URL, e.g. `rtsp://IP-of-your-IP-camera:554/onvif1` for most of `SriCam` (http://www.sricam.com/)
@@ -69,7 +69,7 @@ By setting the options
     cert: 'selfsign.crt'
 ```
 
-you enable the proxy to provide a "secured" channel by using a self signed certificate.
+you enable the proxy to provide a "secured" channel by using a self signed certificate, which obsoletes the a.m. "mixed content" problem.
 
 > Note: You need to make your browser accept this self signed certificate by open `https://localhost:9000` in your browser and establish the browser specific exceptions, before you are able to pass this to the Dragonfly Demonstrator. By this you should see the video of the source in the browser window.
 
