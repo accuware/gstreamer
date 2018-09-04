@@ -1,5 +1,23 @@
 ### About
-GStreamer 1.0 proxy for very low latency streaming over websocket in order to provide IP camera feeds to the Accuware Dragonfly Demonstrator or a browser window.
+GStreamer 1.0 proxy for very low latency streaming over websocket in order to provide IP camera feeds to the [`Accuware Dragonfly Demonstrator`](https://dragonfly-demo.accuware.com)  or a browser window.
+
+### How it works?
+This little node app works like a proxy between a H.264 RTSP video source and your browser, since browsers today are unable to consume H.264 directly. The app uses a GStreamer 1.0 pipleline in order to obtain the H.264 video from a source and converts it to Motion JPEG (MJPEG), which is then forwarded to the browser or any listening application via a `socket.io` websocket.
+
+The generic equivalient with display is this
+
+```
+gst-launch-1.0 -v rtspsrc location=rtsp://<your-IP-camera-url>:554/onvif1 !  rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! autovideosink sync=false
+```
+
+The app uses a slight modification which allows to re-stream the decoded frames via TCP 
+
+```
+gst-launch-1.0 -v rtspsrc location=rtsp://<your-IP-camera-url>:554/onvif1 !  rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! jpegenc quality=75 ! tcpclientsink host=127.0.0.1 port=8001
+```
+
+The app uses the configured `port + 1` for this. You can view the video in your browser then via `localhost:port`
+
 
 ### Prerequesites IP-Cam
 Obtain the RTSP URL, e.g. `rtsp://IP-of-your-IP-camera:554/onvif1` for most of `SriCam` (http://www.sricam.com/)
@@ -10,6 +28,7 @@ sudo apt-get install gstreamer1.0-tools
 ```
 ### Prerequisites macOS
 Install latest packages from here https://gstreamer.freedesktop.org/data/pkg/osx/1.14.2/
+
 
 ### Clone this repo
 ```
