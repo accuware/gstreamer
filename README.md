@@ -13,7 +13,7 @@ gst-launch-1.0 -v rtspsrc location=rtsp://<your-IP-camera-url>:554/onvif1 !  rtp
 The app uses a slight modification which allows to re-stream the decoded frames via TCP 
 
 ```
-gst-launch-1.0 -v rtspsrc location=rtsp://<your-IP-camera-url>:554/onvif1 !  rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! jpegenc quality=75 ! tcpclientsink host=127.0.0.1 port=8001
+gst-launch-1.0 -v rtspsrc location=rtsp://<your-IP-camera-url>:554/onvif1 !  rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! jpegenc quality=75 ! tcpclientsink host=127.0.0.1 port=9001
 ```
 
 The app uses the configured `port + 1` for this. You can view the video in your browser then via `localhost:port`
