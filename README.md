@@ -22,10 +22,28 @@ The app uses the configured `port + 1` for this. You can view the video in your 
 ### Prerequesites IP-Cam
 Obtain the RTSP URL, e.g. `rtsp://IP-of-your-IP-camera:554/onvif1` for most of `SriCam` (http://www.sricam.com/)
 
-### Prerequesites Linux
+### Prerequesites Ubuntu 16.04 LTS
 ```
-sudo apt-get install gstreamer1.0-tools
+sudo apt-get install gstreamer1.0-libav gstreamer1.0-plugins-ugly gstreamer1.0-plugins-base gstreamer1.0-plugins-bad gstreamer1.0-plugins-good gstreamer1.0-tools
 ```
+
+After installation check for availability of `avdec_h264` 
+```
+gst-inspect-1.0 avdec_h264
+```
+
+If it cannot be found, please download the source of gst-libav from here https://gstreamer.freedesktop.org/src/gst-libav/. Take care, that you download the sources matching the version of your apt installation (at time of writing 1.8.3).
+
+Unpack the source code, change into the directory and...
+
+```
+./configure
+make
+sudo make install
+```
+
+
+
 ### Prerequisites macOS
 Install latest packages from here https://gstreamer.freedesktop.org/data/pkg/osx/1.14.2/
 
@@ -84,33 +102,25 @@ security.mixed_content.block_active_content = false
 By setting the options
 
 ```
-    key: 'selfsign.key',
-    cert: 'selfsign.crt'
+    key: 'localhost.key.pem',
+    cert: 'localhost.crt'
 ```
 
 you enable the proxy to provide a "secured" channel by using a self signed certificate, which obsoletes the a.m. "mixed content" problem.
 
-> Note: You need to make your browser accept this self signed certificate by open `https://localhost:9000` in your browser and establish the browser specific exceptions, before you are able to pass this to the Dragonfly Demonstrator. By this you should see the video of the source in the browser window.
+> Note: You need to make your browser accept this self signed certificate by adding the `ca.pem` file to the trusted root CA authorities. You can do this by either importing the root CA certificate into the OS key store or use the browser mechanisms to do that. Details here https://fabianlee.org/2018/02/17/ubuntu-creating-a-trusted-ca-and-san-certificate-using-openssl-on-ubuntu/ section "Browser Evaluation"
+
+Find the stream at
+
+```
+https://localhost:9000
+```
+
+### Use together with Accuware Dragonfly Demonstrator
 
 ```
 https://dragonfly-demo.accuware.com/?video-url=https://localhost:9000
 ```
-
-
-You are free to use the provided certifcate but you can also roll your own or provide a real certificate.
-
-### Create self signed certifcate
-```
-openssl genrsa -out selfsign.key 2048 && openssl req -new -x509 -key selfsign.key -out selfsign.crt -sha256
-```
-
-will produce the two files `selfsign.key` and `selfsign.crt`, which you have to provide to the configuration.
-
-### Verfiy certifcate
-```
-openssl x509 -in selfsign.crt -text -noout
-openssl rsa -in selfsign.key -check
-````
 
 
 If you are unable to make this run, you can still let the Accuware Server obtain the video directly. For this specify your **public** RTSP stream address in the parameter line.
