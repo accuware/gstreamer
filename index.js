@@ -59,6 +59,11 @@ gstreamer.prototype.start = function (options) {
             key: this.fs.readFileSync(this.key),
             cert: this.fs.readFileSync(this.cert)     
         }
+
+        console.log("\n\n*** Please open \"https://"+(this.host ? this.host : "localhost")+":"+this.port+"\" in your browswer. Don't forget to accept self-signed certificate ***\n\n")
+    }
+    else {
+        console.log("\n\n*** Please open \"http://"+(this.host ? this.host : "localhost")+":"+this.port+"\" in your browswer ***\n\n")
     }
 
     this.server = secure_options ?
