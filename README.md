@@ -89,7 +89,9 @@ Provide the configured helper endpoint as query parameter while opening the Accu
 https://dragonfly-demo.accuware.com/?video-url=http://localhost:9000
 ```
 
-> Note: Since this ends up in a mix of secure and insecure content, there is currently only `Chrome`, which supports this for whatever reasons, since it is a tiny security issue. 
+> Note: Since this ends up in a mix of secure and insecure content,  you need to convice the browsers to support this. Please skip the next section, if you don't want to mess with this and use secure content instead (see below).
+
+Since `Chrome` is constantly changing its UI it is hard to provide a way, which is not already outdated the minute this tutorial is written. Google for "how to convince Chrome to mix secure and insecure content". You will find it.
 
 `Firefox` needs to be conviced via 
 ```
@@ -98,6 +100,8 @@ security.mixed_content.block_active_content = false
 ```
 
 `Edge` behaviour is unknown and I could not find any way to make `Safari` establishing a connection to `localhost` while being loaded from a secured server.
+
+### Use secure content
 
 By setting the options
 
@@ -108,7 +112,7 @@ By setting the options
 
 you enable the proxy to provide a "secured" channel by using a self signed certificate, which obsoletes the a.m. "mixed content" problem.
 
-> Note: You need to make your browser accept this self signed certificate by adding the `ca.pem` file to the trusted root CA authorities. You can do this by either importing the root CA certificate into the OS key store or use the browser mechanisms to do that. Details here https://fabianlee.org/2018/02/17/ubuntu-creating-a-trusted-ca-and-san-certificate-using-openssl-on-ubuntu/ section "Browser Evaluation"
+> Note: You can try to make your browser accept this self signed certificate by adding the `ca.pem` file to the trusted root CA authorities. You can do this by either importing the root CA certificate into the OS key store or use the browser mechanisms to do that. Details here https://fabianlee.org/2018/02/17/ubuntu-creating-a-trusted-ca-and-san-certificate-using-openssl-on-ubuntu/ section "Browser Evaluation". But be warned - most the time it is a mess :)
 
 Find the stream at
 
@@ -119,9 +123,10 @@ https://localhost:9000
 ### Use together with Accuware Dragonfly Demonstrator
 
 ```
-https://dragonfly-demo.accuware.com/?video-url=https://localhost:9000
+https://dragonfly-demo.accuware.com/?video-url=http(s)://localhost:9000
 ```
 
+Please make sure beforehand, that your browser has already accepted the self-signed certificate (in case of https) by opening the URL and pass the necessary steps before this operation.  
 
 If you are unable to make this run, you can still let the Accuware Server obtain the video directly. For this specify your **public** RTSP stream address in the parameter line.
 
