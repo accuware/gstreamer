@@ -89,7 +89,7 @@ Provide the configured helper endpoint as query parameter while opening the Accu
 https://dragonfly-demo.accuware.com/?video-url=http://localhost:9000
 ```
 
-> Note: Since this ends up in a mix of secure and insecure content,  you need to convice the browsers to support this. Please skip the next section, if you don't want to mess with this and use secure content instead (see below).
+> Note: Since this ends up in a mix of secure and insecure content,  you need to convice the browsers to support this. Please skip the next section, if you don't want to mess with this and use secure content instead (see "Use secure content" below).
 
 Since `Chrome` is constantly changing its UI it is hard to provide a way, which is not already outdated the minute this tutorial is written. Google for "how to convince Chrome to mix secure and insecure content". You will find it.
 
