@@ -17,7 +17,7 @@ var gstreamer = require(".")
 gstreamer.start({
     url: "rtsp://192.168.188.36:8554/test",		                // Raspberry Pi running gst-rtsp-server
 //    url: "rtsp://192.168.188.30:554/onvif1",		                // SriCam
-//    url: 'rtsp://184.72.239.149/vod/mp4:bigbuckbunny_1500.mp4',     // Movie
+//    url: 'rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov',     // Movie
     quality: 75,
     quiet: false,
     key: 'localhost.key.pem',
